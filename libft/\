@@ -1,0 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vdeliere <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/11 12:14:55 by vdeliere          #+#    #+#             */
+/*   Updated: 2024/11/11 12:45:24 by vdeliere         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <bsd/string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	int		i;
+	size_t	dst_l;
+	size_t	src_l;
+	
+	src_l = 0;
+	dst_l = 0;
+	i = 0;
+	while (dst[dst_l] != '\0')
+		dst_l++;
+	while (src[src_l] != '\0')
+		src_l++;
+	if (size <= dst_l)
+		return (size + src_l);
+	if ((src_l + dst_l) >= size)
+	{
+		while (src[i] != '\0' && (dst_l + i) < (size - 1))
+		{
+			dst[dst_l + i] = src[i];
+			i++;
+		}
+		dst[dst_l + i] = '\0';
+	}
+	return (dst_l + src_l);
+}
+
+int	main(int ac, char **av)
+{
+	char	dest1[] = "Pinpin ";
+	char	dest2[] = "Pinpin ";
+	size_t	size1;
+	size_t	size2;
+
+	if (ac != 3)
+		return (0);
+	size1 = ft_strlcat(dest1, av[1], atoi(av[3]));		
+	size2 = strlcat(dest2, av[1], atoi(av[3]));
+	printf("%s, %ld\n", dest1, size1);
+	printf("%s, %ld\n", dest2, size2);
+	return (0);
+}
