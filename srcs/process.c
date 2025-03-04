@@ -16,7 +16,23 @@
 
 void	ft_cmd1(t_data *data)
 {
+	char **path_split;
+	char *cmd;
+	int	i;
+
+	i = 0;
+	cmd = ft_strjoin('/', data-> params[2]);
+	path_split = ft_split(data->path, ':');
 	open_infile(data);
+	while (path_split[i] != NULL)
+	{
+		if(access(ft_strjoin(path_split[i] , cmd), X_OK) == 0)
+		{
+			return ;
+		}
+		
+		i++;
+	}
 }
 
 void	ft_cmd2(t_data *data)
@@ -28,12 +44,12 @@ void	forker(t_data *data)
 {
 
 	data->pid = fork();
-	if (data->pid != -1)
+	if (data->pid == -1)
 		error_exit("Error child creation\n");
 	if (data->pid != 0)
 	{
 		data->pid = fork();
-		if (data->pid != -1)
+		if (data->pid == -1)
 		{
 			perror("Error child creation\n");
 		}

@@ -20,30 +20,30 @@ void	error_exit (char *str)
 	exit(EXIT_FAILURE);
 }
 
-char *ft_getenv(char **envp)
+void ft_getenv(char **envp, t_data *data)
 {
 	int	i;
 	int j;
 
 	i = 0;
 	j = 0;
-	while (ft_strncmp(envp[i], "PATH", 4) != 0)
+	while (ft_strncmp(envp[i], "PATH=", 5) != 0 && envp[i] != NULL)
 		i++;
-	if (envp[i][j] != '\0')
+	if (envp[i] != NULL)
 	{
 		while (envp[i][j] != '=')
 			j++;
 		j++;
-		return (&envp[i][j]);
+		data->path = &envp[i][j];
 	}
 	else
-		return (NULL);
+		error_exit ("Path error\n");
 }
 
 void data_init(t_data *data, char **av, char **envp)
 {
 	data->params = av;
-	data->path = ft_getenv(envp);
+	ft_getenv(envp, data);
 	printf("%s\n", data->path);
 	data->pipe_fd[0] = 0;
 	data->pipe_fd[1] = 0;
