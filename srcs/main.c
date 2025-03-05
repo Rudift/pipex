@@ -44,7 +44,6 @@ void data_init(t_data *data, char **av, char **envp)
 {
 	data->params = av;
 	ft_getenv(envp, data);
-	printf("%s\n", data->path);
 	data->pipe_fd[0] = 0;
 	data->pipe_fd[1] = 0;
 	data->infile = 0;

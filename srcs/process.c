@@ -18,26 +18,52 @@ void	ft_cmd1(t_data *data)
 {
 	char **path_split;
 	char *cmd;
+	char *cmd_path;
 	int	i;
 
 	i = 0;
-	cmd = ft_strjoin('/', data-> params[2]);
+	cmd = ft_strjoin("/", data-> params[2]);
 	path_split = ft_split(data->path, ':');
 	open_infile(data);
 	while (path_split[i] != NULL)
 	{
-		if(access(ft_strjoin(path_split[i] , cmd), X_OK) == 0)
+		cmd_path = ft_strjoin(path_split[i] , cmd);
+		if(access(cmd_path, X_OK) == 0)
 		{
-			return ;
+			if(execv(cmd_path, (char *[]){cmd_path, data->params[1], NULL}) == -1)
+				perror("Error execv\n");
 		}
-		
+		free (cmd_path);
 		i++;
 	}
+	free(cmd);
+	ft_freetab(path_split);
 }
 
 void	ft_cmd2(t_data *data)
 {
+	char **path_split;
+	char *cmd;
+	char *cmd_path;
+	int	i;
+
+	i = 0;
+	cmd = ft_strjoin("/", data-> params[3]);
+	path_split = ft_split(data->path, ':');
 	open_outfile(data);
+	while (path_split[i] != NULL)
+	{
+		cmd_path = ft_strjoin(path_split[i] , cmd);
+		if(access(cmd_path, X_OK) == 0)
+		{
+			if(execv(cmd_path, (char *[]){cmd_path, data->params[4], NULL}) == -1)
+				perror("Error execv\n");
+		}
+		free (cmd_path);
+		i++;
+	}
+	free(cmd);
+	ft_freetab(path_split);
 }
 
 void	forker(t_data *data)
@@ -55,12 +81,12 @@ void	forker(t_data *data)
 		}
 		else if (data->pid == 0)
 		{
-			ft_cmd2(data); // a faire
+			ft_cmd2(data);
 		}
 	}
 	else if (data->pid == 0)
 	{
-		ft_cmd1(data); // faire cette fonction
+		ft_cmd1(data);
 	}
 	wait(NULL);
 	wait(NULL);
