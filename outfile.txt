@@ -1,1 +1,2 @@
-0
+outfile.txt
+home/vdeliere/.local/funcheck/host/ls -lcmd_path = /home/vdeliere/.local/chroot/usr/bin/ls -lcmd_path = /home/vdeliere/.local/chroot/usr/sbin/ls -lcmd_path = /home/vdeliere/bin/ls -lcmd_path = /usr/local/sbin/ls -lcmd_path = /usr/local/bin/ls -lcmd_path = /usr/sbin/ls -lcmd_path = /usr/bin/ls -lcmd_path = /sbin/ls -lcmd_path = /bin/ls -lcmd_path = /usr/games/ls -lcmd_path = /usr/local/games/ls -lcmd_path = /snap/bin/ls -l
