@@ -45,21 +45,17 @@ static char	*ft_strcdup(const char *s, char c)
 	int		size;
 	char	*res;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
+	if (!s)
+		return (NULL);
 	size = ft_strlen_c(s, c);
 	res = (char *)malloc((size + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
 	while (i < size)
 	{
-		if (s[i] != c)
-		{				
-			res[j] = s[i];
-			j++;
-		}
+		res[i] = s[i];
 		i++;
 	}
 	res[i] = '\0';
@@ -71,21 +67,30 @@ char	**ft_split(char const *s, char c)
 	char	**tab;
 	int		i;
 	int		nbmot;
-
+	
+	if (!s)
+		return (NULL);
 	nbmot = ft_nbmot(s, c);
 	tab = (char **)malloc ((nbmot + 1) * sizeof (char *));
 	if (!tab)
 		return (NULL);
 	i = 0;
-	while (nbmot != 0)
+	while (i < nbmot)
 	{
-		printf ("tchoin\n");
 		while (*s == c)
 			s++;
 		tab[i] = ft_strcdup(s, c);
-		s = ft_strchr(s, c) + 1;
+		if (!tab[i])
+		{
+			while (i > 0)
+				free(tab[--i]);
+			free(tab);
+			return(NULL);
+		}
+		s = ft_strchr(s, c);
+		if (s)
+			s++;
 		i++;
-		nbmot -= 1;
 	}
 	tab[i] = NULL;
 	return (tab);

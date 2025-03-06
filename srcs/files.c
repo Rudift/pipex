@@ -19,12 +19,12 @@ void	open_infile(t_data *data)
 
 	data->infile = open(data->params[1], O_RDWR);
 	if (data->infile == -1)
-		error_exit("Open infile error\n");
+		error_exit("Open infile error\n", data);
 }
 
 void	open_outfile(t_data *data)
 {
 	data->outfile = open(data->params[4],  O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->outfile == -1)
-		error_exit("Open outfile error\n");
+		error_exit("Open outfile error\n", data);
 }

@@ -14,9 +14,17 @@
 
 //Appel de pipex et gestion d'erreurs
 
-void	error_exit (char *str)
+void	error_exit (char *str, t_data *data)
 {
 	perror(str);
+	if (data)
+	{
+		if (data->params)
+			ft_freetab(data->params);
+		if (data->path)
+			free (data->path);
+		free(data);
+	}
 	exit(EXIT_FAILURE);
 }
 
@@ -37,7 +45,7 @@ void ft_getenv(char **envp, t_data *data)
 		data->path = &envp[i][j];
 	}
 	else
-		error_exit ("Path error\n");
+		error_exit ("Path error\n", data);
 }
 
 void data_init(t_data *data, char **av, char **envp)
@@ -57,12 +65,13 @@ int	main(int ac, char **av, char **envp)
 
 	data = NULL;
 	if (ac != 5)
-		error_exit("parse error\n");
+		error_exit("parse error\n", data);
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 		return (0);
 	data_init(data, av, envp);
 	pipex(data);
 	forker(data);
+	free (data);
 	return(0);
 }

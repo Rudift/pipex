@@ -22,6 +22,8 @@ void	ft_cmd1(t_data *data)
 	int		i;
 
 	i = 0;
+	cmd = NULL;
+	path_split = NULL;
 	cmd = ft_split(data->params[2], ' ');
 	printf("cmd 0 : %s ; cmd 1 : %s\n", cmd[0], cmd[1]);
 	path_split = ft_split(data->path, ':');
@@ -42,7 +44,8 @@ void	ft_cmd1(t_data *data)
 	if (path_split[i] == NULL)
 		perror("command not found : cmd1\n");
 	free(cmd);
-	ft_freetab(path_split);
+	if (path_split)
+		ft_freetab(path_split);
 	exit(127);
 }
 
@@ -79,30 +82,8 @@ void	ft_cmd2(t_data *data)
 
 void	forker(t_data *data)
 {
-
 	data->pid = fork();
-	if (data->pid == -1)
-		error_exit("Error child creation\n");
-	if (data->pid != 0)
-	{
-		data->pid = fork();
-		if (data->pid == -1)
-		{
-			perror("Error child creation\n");
-		}
-		else if (data->pid == 0)
-		{
-			close (data->pipe_fd[1]);
-			open_outfile(data);
-			dup2(data->outfile, 1);
-			close(data->outfile);
-			dup2(data->pipe_fd[0], 0);
-			close(data->pipe_fd[0]);
-			ft_cmd2(data);
-		}
-
-	}
-	else if (data->pid == 0)
+	if (data->pid == 0)
 	{
 		close(data->pipe_fd[0]);
 		open_infile(data);
@@ -111,6 +92,17 @@ void	forker(t_data *data)
 		dup2(data->pipe_fd[1], 1);
 		close (data->pipe_fd[1]);
 		ft_cmd1(data);
+	}
+	data->pid = fork();
+	if (data->pid == 0)
+	{
+		close (data->pipe_fd[1]);
+		open_outfile(data);
+		dup2(data->outfile, 1);
+		close(data->outfile);
+		dup2(data->pipe_fd[0], 0);
+		close(data->pipe_fd[0]);
+		ft_cmd2(data);
 	}
 	close(data->pipe_fd[0]);
 	close(data->pipe_fd[1]);

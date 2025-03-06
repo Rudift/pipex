@@ -6,4 +6,4 @@ cmd_path = /usr/local/sbin/wc
 cmd_path = /usr/local/bin/wc
 cmd_path = /usr/sbin/wc
 cmd_path = /usr/bin/wc
-0
+13
