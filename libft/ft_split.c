@@ -79,6 +79,7 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	while (nbmot != 0)
 	{
+		printf ("tchoin\n");
 		while (*s == c)
 			s++;
 		tab[i] = ft_strcdup(s, c);

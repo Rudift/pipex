@@ -24,7 +24,7 @@ void	open_infile(t_data *data)
 
 void	open_outfile(t_data *data)
 {
-	data->outfile = open(data->params[4], O_RDWR);
+	data->outfile = open(data->params[4],  O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->outfile == -1)
 		error_exit("Open outfile error\n");
 }

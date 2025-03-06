@@ -64,4 +64,5 @@ int	main(int ac, char **av, char **envp)
 	data_init(data, av, envp);
 	pipex(data);
 	forker(data);
+	return(0);
 }
