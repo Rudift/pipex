@@ -16,7 +16,8 @@
 
 void	open_infile(t_data *data)
 {
-
+	if (access(data->params[1], R_OK) == -1)
+		error_exit("Access infile error\n", data);
 	data->infile = open(data->params[1], O_RDWR);
 	if (data->infile == -1)
 		error_exit("Open infile error\n", data);
@@ -24,6 +25,8 @@ void	open_infile(t_data *data)
 
 void	open_outfile(t_data *data)
 {
+	if (access(data->params[4], W_OK) == -1)
+		error_exit("Access outfile error\n", data);
 	data->outfile = open(data->params[4],  O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->outfile == -1)
 		error_exit("Open outfile error\n", data);
