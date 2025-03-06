@@ -42,6 +42,10 @@ void	pipex(t_data *data);
 
 /*Process*/
 void	forker(t_data *data);
+void	process_infile(t_data *data);
+void	process_outfile(t_data *data);
+void	ft_cmd1(t_data *data);
+void	ft_cmd2(t_data *data);
 
 /*Files*/
 void	open_infile(t_data	*data);

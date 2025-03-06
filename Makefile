@@ -18,7 +18,7 @@ LIBFT_LIB = $(LIBFT_DIR)libft.a
 SRC_DIR = srcs/
 #SANITIZE = -fsanitize=address -g3
 
-SRC= ${SRC_DIR}main.c ${SRC_DIR}process.c ${SRC_DIR}files.c ${SRC_DIR}pipex.c
+SRC= ${SRC_DIR}main.c ${SRC_DIR}process.c ${SRC_DIR}process2.c ${SRC_DIR}files.c ${SRC_DIR}pipex.c
 
 #BONUS = 
 #BONUS_OBJS = ${BONUS:.c=.o}

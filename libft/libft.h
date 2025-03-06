@@ -80,6 +80,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*get_next_line(int fd);
 
 /*Supplements*/
-void ft_freetab (char **tab);
+void	ft_freetab(char **tab);
 
 #endif

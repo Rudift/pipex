@@ -62,37 +62,41 @@ static char	*ft_strcdup(const char *s, char c)
 	return (res);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_splitinette(char **tab, char const *s, char c, int nbmot)
 {
-	char	**tab;
-	int		i;
-	int		nbmot;
-	
-	if (!s)
-		return (NULL);
-	nbmot = ft_nbmot(s, c);
-	tab = (char **)malloc ((nbmot + 1) * sizeof (char *));
-	if (!tab)
-		return (NULL);
+	int	i;
+
 	i = 0;
-	while (i < nbmot)
+	while (i++ < nbmot)
 	{
 		while (*s == c)
 			s++;
 		tab[i] = ft_strcdup(s, c);
 		if (!tab[i])
 		{
-			while (i > 0)
-				free(tab[--i]);
-			free(tab);
-			return(NULL);
+			ft_freetab(tab);
+			return (NULL);
 		}
 		s = ft_strchr(s, c);
 		if (s)
 			s++;
-		i++;
 	}
 	tab[i] = NULL;
+	return (tab);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**tab;
+	int		nbmot;
+
+	if (!s)
+		return (NULL);
+	nbmot = ft_nbmot(s, c);
+	tab = (char **)malloc ((nbmot + 1) * sizeof (char *));
+	if (!tab)
+		return (NULL);
+	ft_splitinette(tab, s, c, nbmot);
 	return (tab);
 }
 /*int	main(int ac, char **av)

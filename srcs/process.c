@@ -14,18 +14,12 @@
 
 // Gestion des processus (fork, execve)
 
-void	ft_cmd1(t_data *data)
+void	ft_cmd1_inette(t_data *data, char **path_split, char **cmd)
 {
-	char	**path_split;
-	char	**cmd;
 	char	*cmd_path;
 	int		i;
 
 	i = 0;
-	cmd = NULL;
-	path_split = NULL;
-	cmd = ft_split(data->params[2], ' ');
-	path_split = ft_split(data->path, ':');
 	while (path_split[i] != NULL)
 	{
 		cmd_path = ft_strjoin(path_split[i], "/");
@@ -41,22 +35,30 @@ void	ft_cmd1(t_data *data)
 	}
 	if (path_split[i] == NULL)
 		perror("command not found : cmd1\n");
+}
+
+void	ft_cmd1(t_data *data)
+{
+	char	**path_split;
+	char	**cmd;
+
+	cmd = NULL;
+	path_split = NULL;
+	cmd = ft_split(data->params[2], ' ');
+	path_split = ft_split(data->path, ':');
+	ft_cmd1_inette(data, path_split, cmd);
 	free(cmd);
 	if (path_split)
 		ft_freetab(path_split);
 	exit(127);
 }
 
-void	ft_cmd2(t_data *data)
+void	ft_cmd2_inette(t_data *data, char **path_split, char **cmd)
 {
-	char	**path_split;
-	char	**cmd;
 	char	*cmd_path;
 	int		i;
 
 	i = 0;
-	cmd = ft_split(data->params[3], ' ');
-	path_split = ft_split(data->path, ':');
 	while (path_split[i] != NULL)
 	{
 		cmd_path = ft_strjoin(path_split[i], "/");
@@ -72,6 +74,16 @@ void	ft_cmd2(t_data *data)
 	}
 	if (path_split[i] == NULL)
 		perror("command not found : cmd2\n");
+}
+
+void	ft_cmd2(t_data *data)
+{
+	char	**path_split;
+	char	**cmd;
+
+	cmd = ft_split(data->params[3], ' ');
+	path_split = ft_split(data->path, ':');
+	ft_cmd2_inette(data, path_split, cmd);
 	free(cmd);
 	ft_freetab(path_split);
 	exit(127);
@@ -81,26 +93,10 @@ void	forker(t_data *data)
 {
 	data->pid = fork();
 	if (data->pid == 0)
-	{
-		close(data->pipe_fd[0]);
-		open_infile(data);
-		dup2(data->infile, 0);
-		close(data->infile);
-		dup2(data->pipe_fd[1], 1);
-		close (data->pipe_fd[1]);
-		ft_cmd1(data);
-	}
+		process_infile(data);
 	data->pid = fork();
 	if (data->pid == 0)
-	{
-		close (data->pipe_fd[1]);
-		open_outfile(data);
-		dup2(data->outfile, 1);
-		close(data->outfile);
-		dup2(data->pipe_fd[0], 0);
-		close(data->pipe_fd[0]);
-		ft_cmd2(data);
-	}
+		process_outfile(data);
 	close(data->pipe_fd[0]);
 	close(data->pipe_fd[1]);
 	wait(NULL);
