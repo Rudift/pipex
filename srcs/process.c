@@ -25,16 +25,14 @@ void	ft_cmd1(t_data *data)
 	cmd = NULL;
 	path_split = NULL;
 	cmd = ft_split(data->params[2], ' ');
-	printf("cmd 0 : %s ; cmd 1 : %s\n", cmd[0], cmd[1]);
 	path_split = ft_split(data->path, ':');
 	while (path_split[i] != NULL)
 	{
 		cmd_path = ft_strjoin(path_split[i], "/");
 		cmd_path = ft_strjoin(cmd_path, cmd[0]);
-		printf("cmd_path = %s\n", cmd_path);
-		if(access(cmd_path, X_OK) == 0)
+		if (access(cmd_path, X_OK) == 0)
 		{
-			if(execv(cmd_path, (char *[]){cmd_path, cmd[1], NULL}) == -1)
+			if (execv(cmd_path, (char *[]){cmd_path, cmd[1], NULL}) == -1)
 				perror("Error execv\n");
 			break ;
 		}
@@ -63,10 +61,9 @@ void	ft_cmd2(t_data *data)
 	{
 		cmd_path = ft_strjoin(path_split[i], "/");
 		cmd_path = ft_strjoin(cmd_path, cmd[0]);
-		printf("cmd_path = %s\n", cmd_path);
-		if(access(cmd_path, X_OK) == 0)
+		if (access(cmd_path, X_OK) == 0)
 		{
-			if(execv(cmd_path, (char *[]){cmd_path, cmd[1], NULL}) == -1)
+			if (execv(cmd_path, (char *[]){cmd_path, cmd[1], NULL}) == -1)
 				perror("Error execv\n");
 			break ;
 		}
@@ -109,4 +106,3 @@ void	forker(t_data *data)
 	wait(NULL);
 	wait(NULL);
 }
-

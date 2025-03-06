@@ -27,7 +27,7 @@ void	open_outfile(t_data *data)
 {
 	if (access(data->params[4], W_OK) == -1)
 		error_exit("Access outfile error\n", data);
-	data->outfile = open(data->params[4],  O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	data->outfile = open(data->params[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->outfile == -1)
 		error_exit("Open outfile error\n", data);
 }

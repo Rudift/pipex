@@ -13,16 +13,16 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-#  include <sys/types.h>
-#  include <sys/stat.h>
-#  include <string.h>
-#  include <stdlib.h>
-#  include <fcntl.h>
-#  include <unistd.h>
-#  include <stdio.h>
-#  include <sys/wait.h>
-#  include <time.h>
-#  include "../libft/libft.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <string.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <sys/wait.h>
+# include <time.h>
+# include "../libft/libft.h"
 
 typedef struct s_data
 {
@@ -35,11 +35,10 @@ typedef struct s_data
 }	t_data;
 
 /*Main*/
-void	error_exit (char *str, t_data *data);
+void	error_exit(char *str, t_data *data);
 
 /*Pipex*/
 void	pipex(t_data *data);
-
 
 /*Process*/
 void	forker(t_data *data);
@@ -48,4 +47,4 @@ void	forker(t_data *data);
 void	open_infile(t_data	*data);
 void	open_outfile(t_data *data);
 
-# endif
+#endif

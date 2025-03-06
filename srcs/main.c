@@ -14,7 +14,7 @@
 
 //Appel de pipex et gestion d'erreurs
 
-void	error_exit (char *str, t_data *data)
+void	error_exit(char *str, t_data *data)
 {
 	perror(str);
 	if (data)
@@ -28,10 +28,10 @@ void	error_exit (char *str, t_data *data)
 	exit(EXIT_FAILURE);
 }
 
-void ft_getenv(char **envp, t_data *data)
+void	ft_getenv(char **envp, t_data *data)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -48,7 +48,7 @@ void ft_getenv(char **envp, t_data *data)
 		error_exit ("Path error\n", data);
 }
 
-void data_init(t_data *data, char **av, char **envp)
+void	data_init(t_data *data, char **av, char **envp)
 {
 	data->params = av;
 	ft_getenv(envp, data);
@@ -73,5 +73,5 @@ int	main(int ac, char **av, char **envp)
 	pipex(data);
 	forker(data);
 	free (data);
-	return(0);
+	return (0);
 }
