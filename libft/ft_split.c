@@ -45,60 +45,51 @@ static char	*ft_strcdup(const char *s, char c)
 	int		size;
 	char	*res;
 	int		i;
+	int		j;
 
 	i = 0;
-	if (!s)
-		return (NULL);
+	j = 0;
 	size = ft_strlen_c(s, c);
 	res = (char *)malloc((size + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
 	while (i < size)
 	{
-		res[i] = s[i];
+		if (s[i] != c)
+		{				
+			res[j] = s[i];
+			j++;
+		}
 		i++;
 	}
 	res[i] = '\0';
 	return (res);
 }
 
-char	**ft_splitinette(char **tab, char const *s, char c, int nbmot)
+char	**ft_split(char const *s, char c)
 {
-	int	i;
+	char	**tab;
+	int		i;
+	int		nbmot;
 
+	nbmot = ft_nbmot(s, c);
+	tab = (char **)malloc ((nbmot + 1) * sizeof (char *));
+	if (!tab)
+		return (NULL);
 	i = 0;
-	while (i++ < nbmot)
+	while (nbmot != 0)
 	{
 		while (*s == c)
 			s++;
 		tab[i] = ft_strcdup(s, c);
-		if (!tab[i])
-		{
-			ft_freetab(tab);
-			return (NULL);
-		}
-		s = ft_strchr(s, c);
-		if (s)
-			s++;
+		s = ft_strchr(s, c) + 1;
+		i++;
+		nbmot -= 1;
 	}
 	tab[i] = NULL;
 	return (tab);
 }
 
-char	**ft_split(char const *s, char c)
-{
-	char	**tab;
-	int		nbmot;
-
-	if (!s)
-		return (NULL);
-	nbmot = ft_nbmot(s, c);
-	tab = (char **)malloc ((nbmot + 1) * sizeof (char *));
-	if (!tab)
-		return (NULL);
-	ft_splitinette(tab, s, c, nbmot);
-	return (tab);
-}
 /*int	main(int ac, char **av)
 {
 	int		i;

@@ -17,5 +17,5 @@
 void	pipex(t_data *data)
 {
 	if (pipe(data->pipe_fd) == -1)
-		error_exit("Error with creating pipe\n", data);
+		error_exit("Error with creating pipe", data);
 }

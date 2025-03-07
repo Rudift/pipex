@@ -1,9 +1,0 @@
-cmd_path = /home/vdeliere/.local/funcheck/host/wc
-cmd_path = /home/vdeliere/.local/chroot/usr/bin/wc
-cmd_path = /home/vdeliere/.local/chroot/usr/sbin/wc
-cmd_path = /home/vdeliere/bin/wc
-cmd_path = /usr/local/sbin/wc
-cmd_path = /usr/local/bin/wc
-cmd_path = /usr/sbin/wc
-cmd_path = /usr/bin/wc
-13

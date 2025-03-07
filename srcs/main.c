@@ -19,11 +19,13 @@ void	error_exit(char *str, t_data *data)
 	perror(str);
 	if (data)
 	{
-		if (data->params)
-			ft_freetab(data->params);
-		if (data->path)
-			free (data->path);
+		// if (data->path)
+		// {
+		// 	free (data->path);
+		// 	data->path = NULL;
+		// }
 		free(data);
+		data = NULL;
 	}
 	exit(EXIT_FAILURE);
 }
@@ -35,7 +37,9 @@ void	ft_getenv(char **envp, t_data *data)
 
 	i = 0;
 	j = 0;
-	while (ft_strncmp(envp[i], "PATH=", 5) != 0 && envp[i] != NULL)
+	if (envp == NULL)
+		error_exit("command not found getenv", data);
+	while (envp[i] != NULL && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
 	if (envp[i] != NULL)
 	{
@@ -45,12 +49,13 @@ void	ft_getenv(char **envp, t_data *data)
 		data->path = &envp[i][j];
 	}
 	else
-		error_exit ("Path error\n", data);
+		error_exit ("Path error", data);
 }
 
 void	data_init(t_data *data, char **av, char **envp)
 {
 	data->params = av;
+	data->path = NULL;
 	ft_getenv(envp, data);
 	data->pipe_fd[0] = 0;
 	data->pipe_fd[1] = 0;
@@ -65,7 +70,7 @@ int	main(int ac, char **av, char **envp)
 
 	data = NULL;
 	if (ac != 5)
-		error_exit("parse error\n", data);
+		error_exit("parse error", data);
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 		return (0);

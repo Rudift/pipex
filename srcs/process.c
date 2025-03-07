@@ -17,24 +17,27 @@
 void	ft_cmd1_inette(t_data *data, char **path_split, char **cmd)
 {
 	char	*cmd_path;
+	char	*tmp;
 	int		i;
 
 	i = 0;
 	while (path_split[i] != NULL)
 	{
-		cmd_path = ft_strjoin(path_split[i], "/");
-		cmd_path = ft_strjoin(cmd_path, cmd[0]);
+		tmp = ft_strjoin(path_split[i], "/");
+		cmd_path = ft_strjoin(tmp, cmd[0]);
+		free(tmp);
 		if (access(cmd_path, X_OK) == 0)
 		{
 			if (execv(cmd_path, (char *[]){cmd_path, cmd[1], NULL}) == -1)
-				perror("Error execv\n");
+				perror("Error execv");
 			break ;
 		}
 		free (cmd_path);
 		i++;
 	}
+	ft_freetab(cmd);
 	if (path_split[i] == NULL)
-		perror("command not found : cmd1\n");
+		perror("command not found cmd1");
 }
 
 void	ft_cmd1(t_data *data)
@@ -47,33 +50,36 @@ void	ft_cmd1(t_data *data)
 	cmd = ft_split(data->params[2], ' ');
 	path_split = ft_split(data->path, ':');
 	ft_cmd1_inette(data, path_split, cmd);
-	free(cmd);
 	if (path_split)
 		ft_freetab(path_split);
+	free(data);
 	exit(127);
 }
 
 void	ft_cmd2_inette(t_data *data, char **path_split, char **cmd)
 {
 	char	*cmd_path;
+	char	*tmp;
 	int		i;
 
 	i = 0;
 	while (path_split[i] != NULL)
 	{
-		cmd_path = ft_strjoin(path_split[i], "/");
-		cmd_path = ft_strjoin(cmd_path, cmd[0]);
+		tmp = ft_strjoin(path_split[i], "/");
+		cmd_path = ft_strjoin(tmp, cmd[0]);
+		free(tmp);
 		if (access(cmd_path, X_OK) == 0)
 		{
 			if (execv(cmd_path, (char *[]){cmd_path, cmd[1], NULL}) == -1)
-				perror("Error execv\n");
+				perror("Error execv");
 			break ;
 		}
 		free (cmd_path);
 		i++;
 	}
+	ft_freetab(cmd);
 	if (path_split[i] == NULL)
-		perror("command not found : cmd2\n");
+		perror("command not found cmd 2");
 }
 
 void	ft_cmd2(t_data *data)
@@ -84,8 +90,8 @@ void	ft_cmd2(t_data *data)
 	cmd = ft_split(data->params[3], ' ');
 	path_split = ft_split(data->path, ':');
 	ft_cmd2_inette(data, path_split, cmd);
-	free(cmd);
 	ft_freetab(path_split);
+	free(data);
 	exit(127);
 }
 
