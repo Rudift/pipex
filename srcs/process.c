@@ -37,7 +37,7 @@ void	ft_cmd1_inette(t_data *data, char **path_split, char **cmd)
 	}
 	ft_freetab(cmd);
 	if (path_split[i] == NULL)
-		perror("command not found cmd1");
+		perror("command not found");
 }
 
 void	ft_cmd1(t_data *data)
@@ -79,7 +79,7 @@ void	ft_cmd2_inette(t_data *data, char **path_split, char **cmd)
 	}
 	ft_freetab(cmd);
 	if (path_split[i] == NULL)
-		perror("command not found cmd 2");
+		perror("command not found");
 }
 
 void	ft_cmd2(t_data *data)

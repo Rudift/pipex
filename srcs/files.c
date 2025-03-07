@@ -17,10 +17,10 @@
 void	open_infile(t_data *data)
 {
 	if (access(data->params[1], R_OK) == -1)
-		error_exit("Access infile error", data);
+		error_exit("Access infile error\n", data);
 	data->infile = open(data->params[1], O_RDONLY);
 	if (data->infile == -1)
-		error_exit("Open infile error", data);
+		error_exit("Open infile error\n", data);
 }
 
 void	open_outfile(t_data *data)

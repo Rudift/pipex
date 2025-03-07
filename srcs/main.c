@@ -16,14 +16,9 @@
 
 void	error_exit(char *str, t_data *data)
 {
-	perror(str);
+	ft_putstr_fd(str, 2);
 	if (data)
 	{
-		// if (data->path)
-		// {
-		// 	free (data->path);
-		// 	data->path = NULL;
-		// }
 		free(data);
 		data = NULL;
 	}
@@ -38,7 +33,7 @@ void	ft_getenv(char **envp, t_data *data)
 	i = 0;
 	j = 0;
 	if (envp == NULL)
-		error_exit("command not found getenv", data);
+		error_exit("command not found getenv\n", data);
 	while (envp[i] != NULL && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
 	if (envp[i] != NULL)
@@ -49,7 +44,7 @@ void	ft_getenv(char **envp, t_data *data)
 		data->path = &envp[i][j];
 	}
 	else
-		error_exit ("Path error", data);
+		error_exit ("Path error\n", data);
 }
 
 void	data_init(t_data *data, char **av, char **envp)
@@ -70,7 +65,7 @@ int	main(int ac, char **av, char **envp)
 
 	data = NULL;
 	if (ac != 5)
-		error_exit("parse error", data);
+		error_exit("parse error\n", data);
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 		return (0);
