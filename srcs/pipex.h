@@ -36,6 +36,7 @@ typedef struct s_data
 
 /*Main*/
 void	error_exit(char *str, t_data *data);
+void	perror_exit(char *str, t_data *data);
 
 /*Pipex*/
 void	pipex(t_data *data);

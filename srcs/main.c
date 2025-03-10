@@ -25,6 +25,17 @@ void	error_exit(char *str, t_data *data)
 	exit(EXIT_FAILURE);
 }
 
+void	perror_exit(char *str, t_data *data)
+{
+	perror(str);
+	if (data)
+	{
+		free(data);
+		data = NULL;
+	}
+	exit(EXIT_FAILURE);
+}
+
 void	ft_getenv(char **envp, t_data *data)
 {
 	int	i;

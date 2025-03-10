@@ -53,7 +53,7 @@ void	ft_cmd1(t_data *data)
 	if (path_split)
 		ft_freetab(path_split);
 	free(data);
-	exit(127);
+	exit(EXIT_FAILURE);
 }
 
 void	ft_cmd2_inette(t_data *data, char **path_split, char **cmd)
@@ -92,7 +92,7 @@ void	ft_cmd2(t_data *data)
 	ft_cmd2_inette(data, path_split, cmd);
 	ft_freetab(path_split);
 	free(data);
-	exit(127);
+	exit(EXIT_FAILURE);
 }
 
 void	forker(t_data *data)
