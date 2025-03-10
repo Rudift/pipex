@@ -17,7 +17,7 @@
 void	open_infile(t_data *data)
 {
 	if (access(data->params[1], R_OK) == -1)
-		perror_exit("Access infile error\n", data);
+		perror_exit(data->params[1], data);
 	data->infile = open(data->params[1], O_RDONLY);
 	if (data->infile == -1)
 		perror_exit("Open infile error\n", data);
@@ -26,7 +26,7 @@ void	open_infile(t_data *data)
 void	open_outfile(t_data *data)
 {
 	if (access(data->params[4], W_OK) == -1)
-		perror_exit("Access outfile error\n", data);
+		perror_exit(data->params[4], data);
 	data->outfile = open(data->params[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->outfile == -1)
 		perror_exit("Open outfile error\n", data);

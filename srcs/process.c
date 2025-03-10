@@ -29,7 +29,7 @@ void	ft_cmd1_inette(t_data *data, char **path_split, char **cmd)
 		if (access(cmd_path, X_OK) == 0)
 		{
 			if (execv(cmd_path, (char *[]){cmd_path, cmd[1], NULL}) == -1)
-				perror("Error execv");
+				perror("Execv error");
 			break ;
 		}
 		free (cmd_path);
@@ -37,7 +37,10 @@ void	ft_cmd1_inette(t_data *data, char **path_split, char **cmd)
 	}
 	ft_freetab(cmd);
 	if (path_split[i] == NULL)
-		perror("command not found");
+	{
+		ft_putstr_fd(data->params[2], 2);
+		ft_putstr_fd(" : command not found\n", 2);
+	}
 }
 
 void	ft_cmd1(t_data *data)
@@ -71,7 +74,7 @@ void	ft_cmd2_inette(t_data *data, char **path_split, char **cmd)
 		if (access(cmd_path, X_OK) == 0)
 		{
 			if (execv(cmd_path, (char *[]){cmd_path, cmd[1], NULL}) == -1)
-				perror("Error execv");
+				perror("Execv error");
 			break ;
 		}
 		free (cmd_path);
@@ -79,7 +82,10 @@ void	ft_cmd2_inette(t_data *data, char **path_split, char **cmd)
 	}
 	ft_freetab(cmd);
 	if (path_split[i] == NULL)
-		perror("command not found");
+	{
+		ft_putstr_fd(data->params[3], 2);
+		ft_putstr_fd(" : command not found\n", 2);
+	}
 }
 
 void	ft_cmd2(t_data *data)

@@ -44,7 +44,7 @@ void	ft_getenv(char **envp, t_data *data)
 	i = 0;
 	j = 0;
 	if (envp == NULL)
-		error_exit("command not found getenv\n", data);
+		error_exit("command not found\n", data);
 	while (envp[i] != NULL && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
 	if (envp[i] != NULL)

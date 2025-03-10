@@ -23,6 +23,7 @@
 # include <sys/wait.h>
 # include <time.h>
 # include "../libft/libft.h"
+# include <errno.h>
 
 typedef struct s_data
 {
