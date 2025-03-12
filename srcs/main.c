@@ -75,9 +75,9 @@ int	main(int ac, char **av, char **envp)
 	t_data	*data;
 
 	data = NULL;
-	if (ac != 5 )
+	if (ac != 5)
 		error_exit("Invalid number of arguments\n", data);
-	if (ft_strncmp(av[2],"", 1) == 0 || ft_strncmp(av[3],"", 1) == 0)
+	if (ft_strncmp(av[2], "", 1) == 0 || ft_strncmp(av[3], "", 1) == 0)
 		error_exit("command not found\n", data);
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
@@ -86,5 +86,5 @@ int	main(int ac, char **av, char **envp)
 	pipex(data);
 	forker(data);
 	free (data);
-	return (0);
+	exit(EXIT_SUCCESS);
 }

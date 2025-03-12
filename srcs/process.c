@@ -28,7 +28,7 @@ void	ft_cmd1_inette(t_data *data, char **path_split, char **cmd)
 		free(tmp);
 		if (access(cmd_path, X_OK) == 0)
 		{
-			if (execv(cmd_path, (char *[]){cmd_path, cmd[1], NULL}) == -1)
+			if (execve(cmd_path, cmd, NULL) == -1)
 				perror("Execv error");
 			break ;
 		}
@@ -73,7 +73,7 @@ void	ft_cmd2_inette(t_data *data, char **path_split, char **cmd)
 		free(tmp);
 		if (access(cmd_path, X_OK) == 0)
 		{
-			if (execv(cmd_path, (char *[]){cmd_path, cmd[1], NULL}) == -1)
+			if (execve(cmd_path, cmd, NULL) == -1)
 				perror("Execv error");
 			break ;
 		}
